@@ -64,7 +64,7 @@ def serve_static_app(app):
         if path.startswith(settings.API_PATH) or path.startswith("/docs"):
             return response
         if response.status_code == 404:
-            return FileResponse("../static/index.html")
+            return FileResponse("static/index.html")
         return response
 
 

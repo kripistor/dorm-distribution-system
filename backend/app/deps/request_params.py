@@ -4,9 +4,9 @@ from typing import Annotated, Callable, Optional, Type
 from fastapi import Depends, HTTPException, Query
 from sqlalchemy import UnaryExpression, asc, desc
 
-from backend.app.db import Base
-from backend.app import Item
-from backend.app.schemas.request_params import RequestParams
+from app.db import Base
+from app.models.dormitory import Dormitory as Item
+from app.schemas.request_params import RequestParams
 
 
 def parse_react_admin_params(model: Type[Base]) -> Callable:
