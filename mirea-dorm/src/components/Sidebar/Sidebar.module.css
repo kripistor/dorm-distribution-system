@@ -1,0 +1,68 @@
+.sidenav {
+    color: #ffffff;
+    height: 100%; /* 100% Full-height */
+    width: 0; /* 0 width - change this with JavaScript */
+    position: fixed; /* Stay in place */
+    z-index: 1; /* Stay on top */
+    top: 0; /* Stay at the top */
+    left: 0;
+    /*background: linear-gradient(90deg, #D4D4D4 0%, rgba(234, 234, 234, 0.85) 36.46%, rgba(242, 242, 242, 0.53) 100%);*/
+    background: #103663;
+    overflow-x: hidden; /* Disable horizontal scroll */
+    overflow-y: hidden;
+    transition: width 0.5s
+}
+
+.sidenav .mirea_logo {
+    width: 100px;
+    padding-bottom: 36px;
+}
+
+/* When you mouse over the navigation links, change their color */
+.sidenav div img:hover {
+    color: #f1f1f1;
+}
+
+.sidenav .close_btn {
+    position: absolute;
+    top: 0;
+    right: 25px;
+    font-size: 36px;
+    margin-left: 0;
+    margin-top: auto;
+    text-decoration: none;
+    color: #636566
+}
+
+.sidenav_content {
+    padding: 36px 0 10px 36px;
+}
+
+.link {
+    font-size: 20px;
+    font-weight: 500;
+    line-height: 1.2;
+    padding: 10px 0;
+    display: block;
+    transition: 0.3s;
+}
+
+.link a {
+    color: #ffffff;
+    text-decoration: none;
+    font-family: Helvetica Neue, sans-serif;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.link a:hover {
+    color: #cbe2fb;
+    text-decoration: none;
+}
+
+/*make second element from back margin-top 10px*/
+.link:nth-last-child(2) {
+    margin-top: 40px;
+}

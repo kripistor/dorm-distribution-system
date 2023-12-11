@@ -1,0 +1,28 @@
+.dorms_list {
+    display: flex;
+    flex-direction: column;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-content: center;
+    gap: 40px;
+    max-width: 1440px;
+}
+
+.dorm_card {
+    padding: 15px;
+    border-radius: 10px;
+    background-color: #eef5fb;
+}
+.dorm_gallery {
+    display: flex;
+    flex-direction: row;
+    flex-wrap: wrap;
+    justify-content: space-around;
+    align-content: center;
+    gap: 30px;
+}
+
+.dorm_address {
+    font-weight: 500;
+}
+

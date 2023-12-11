@@ -1,16 +1,22 @@
-import React from "react";
+import Header from "../../components/Header/Header";
+import Sidebar from "../../components/Sidebar/Sidebar";
 
 
-const MainPage = () => {
+const MainPage = ({toggleSideBar, isSidebarOpen}) => {
     return (
         <>
-            <div className="container-fluid bg-black text-white">
-                <div>
+            <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSideBar}/>
+            <section>
+                <Header toggleSidebar={toggleSideBar}/>
+                <div className="container-fluid bg-black text-white">
                     <div>
-                        <h1>Mirea dorm manage</h1>
+                        <div>
+                            <h1>Mirea dorm manage</h1>
+                        </div>
                     </div>
                 </div>
-            </div>
+            </section>
+
         </>
     )
 }
