@@ -1,12 +1,12 @@
 from typing import Any, List, Optional
 
 from fastapi import APIRouter, HTTPException
-from sqlalchemy import func, select
 from starlette.responses import Response
 
 from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.models.dormitory import Dormitory
+from app.repo.dormitory_repo import DormitoryRepo
 from app.schemas.dormitory import Dormitory as DormitoriesSchema, DormitoryCreate, DormitoryUpdate
 
 router = APIRouter(prefix="/dormitories")
@@ -18,21 +18,10 @@ async def get_dormitories(
         session: CurrentAsyncSession,
         request_params: ItemRequestParams,
 ) -> Any:
-    total = await session.scalar(
-        select(func.count(Dormitory.id))
-    )
-    dormitories = (
-        (
-            await session.execute(
-                select(Dormitory)
-                .offset(request_params.skip)
-                .limit(request_params.limit)
-                .order_by(request_params.order_by)
-            )
-        )
-        .scalars()
-        .all()
-    )
+    dormitory_repo: DormitoryRepo = DormitoryRepo(session)
+    dormitories = await dormitory_repo.get_all()
+    if not dormitories:
+        return []
     return dormitories
 
 
@@ -41,10 +30,10 @@ async def create_dormitory(
         dormitory_in: DormitoryCreate,
         session: CurrentAsyncSession,
 ) -> Any:
+    dormitory_repo: DormitoryRepo = DormitoryRepo(session)
     dormitory = Dormitory(**dormitory_in.dict())
-    session.add(dormitory)
-    await session.commit()
-    return dormitory
+    result = await dormitory_repo.create(dormitory)
+    return result
 
 
 @router.put("/{dormitory_id}", response_model=DormitoriesSchema)
@@ -53,15 +42,9 @@ async def update_dormitory(
         dormitory_in: DormitoryUpdate,
         session: CurrentAsyncSession,
 ) -> Any:
-    dormitory: Optional[Dormitory] = await session.get(Dormitory, dormitory_id)
-    if not dormitory:
-        raise HTTPException(404)
-    update_data = dormitory_in.dict(exclude_unset=True)
-    for field, value in update_data.items():
-        setattr(dormitory, field, value)
-    session.add(dormitory)
-    await session.commit()
-    return dormitory
+    dormitory_repo: DormitoryRepo = DormitoryRepo(session)
+    result = await dormitory_repo.update(dormitory_id, dormitory_in)
+    return result
 
 
 @router.delete("/{dormitory_id}")
@@ -69,9 +52,6 @@ async def delete_dormitory(
         dormitory_id: int,
         session: CurrentAsyncSession,
 ) -> Any:
-    dormitory: Optional[Dormitory] = await session.get(Dormitory, dormitory_id)
-    if not dormitory:
-        raise HTTPException(404)
-    await session.delete(dormitory)
-    await session.commit()
-    return {"success": True}
+    dormitory_repo: DormitoryRepo = DormitoryRepo(session)
+    result = await dormitory_repo.delete(dormitory_id)
+    return result
