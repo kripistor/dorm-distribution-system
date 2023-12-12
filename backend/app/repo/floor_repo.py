@@ -25,14 +25,12 @@ class FloorRepo(SQLAlchemyRepo):
             )
         ).scalar()
 
-    async def create_floor(self, floor_in: FloorCreate) -> Floor:
+    async def create_floor(self, floor_in: Floor) -> Floor:
         try:
-            floor = Floor(**floor_in.dict())
-            self.session.add(floor)
+            self.session.add(floor_in)
             await self.session.commit()
-            return floor
+            return floor_in.to_dto()
         except Exception as e:
-            logging.error(f"Error creating floor: {e}")
             await self.session.rollback()
 
     async def update_floor(self, floor_id: int, floor_in: FloorUpdate) -> Floor:

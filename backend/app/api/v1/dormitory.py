@@ -7,12 +7,12 @@ from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.models.dormitory import Dormitory
 from app.repo.dormitory_repo import DormitoryRepo
-from app.schemas.dormitory import Dormitory as DormitoriesSchema, DormitoryCreate, DormitoryUpdate
+from app.schemas.dormitory import DormitoryRead, DormitoryCreate, DormitoryUpdate
 
 router = APIRouter(prefix="/dormitories")
 
 
-@router.get("", response_model=List[DormitoriesSchema])
+@router.get("", response_model=List[DormitoryRead])
 async def get_dormitories(
         response: Response,
         session: CurrentAsyncSession,
@@ -25,7 +25,7 @@ async def get_dormitories(
     return dormitories
 
 
-@router.post("", response_model=DormitoriesSchema, status_code=201)
+@router.post("", response_model=DormitoryRead, status_code=201)
 async def create_dormitory(
         dormitory_in: DormitoryCreate,
         session: CurrentAsyncSession,
@@ -36,7 +36,7 @@ async def create_dormitory(
     return result
 
 
-@router.put("/{dormitory_id}", response_model=DormitoriesSchema)
+@router.put("/{dormitory_id}", response_model=DormitoryRead)
 async def update_dormitory(
         dormitory_id: int,
         dormitory_in: DormitoryUpdate,

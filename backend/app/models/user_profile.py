@@ -2,7 +2,7 @@ from datetime import datetime
 from uuid import UUID
 
 from fastapi_users_db_sqlalchemy import GUID
-from sqlalchemy import String, DateTime, ForeignKey
+from sqlalchemy import String, DateTime, ForeignKey, Integer
 from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
@@ -10,7 +10,7 @@ from app.db import Base
 
 class UserProfile(Base):
     __tablename__ = "user_profiles"
-    id: Mapped[int] = mapped_column(primary_key=True)
+    id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
     user_id: Mapped[UUID] = mapped_column(GUID, ForeignKey("users.id"))
     card_number: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)

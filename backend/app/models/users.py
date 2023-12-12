@@ -12,8 +12,6 @@ if TYPE_CHECKING:
 
 class User(SQLAlchemyBaseUserTableUUID, Base):
     __tablename__ = "users"
-    login: Mapped[str] = mapped_column(String, index=True, nullable=False)
-    password: Mapped[str] = mapped_column(String, nullable=False)
 
 
     def __repr__(self):

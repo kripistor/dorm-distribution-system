@@ -18,11 +18,15 @@ class RoomRepo(SQLAlchemyRepo):
             )
         ).scalars().all()
 
-    async def get_room_by_id(self, room_id: int) -> Room:
+    async def get_room(self, room_id: int| None = None, floor_id:int|None = None) -> Room:
+        stmt = select(Room)
+        if room_id:
+            stmt = stmt.where(Room.id == room_id)
+        if floor_id:
+            stmt = stmt.where(Room.floor_id == floor_id)
         return (
             await self.session.execute(
-                select(Room)
-                .where(Room.id == room_id)
+                stmt
             )
         ).scalar()
 

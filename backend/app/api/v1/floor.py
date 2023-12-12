@@ -6,12 +6,13 @@ from starlette.responses import Response
 from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.repo.floor_repo import FloorRepo
-from app.schemas.floor import Floor as FloorSchema, FloorUpdate
+from app.models.floor import Floor
+from app.schemas.floor import FloorRead, FloorUpdate, FloorCreate
 
 router = APIRouter(prefix="/floors")
 
 
-@router.get("/{dormitory_id}", response_model=List[FloorSchema])
+@router.get("/{dormitory_id}", response_model=List[FloorRead])
 async def get_dormitory_floor(
         dormitory_id: int,
         response: Response,
@@ -25,18 +26,18 @@ async def get_dormitory_floor(
     return floors
 
 
-@router.post("", response_model=FloorSchema, status_code=201)
+@router.post("", response_model=FloorRead, status_code=201)
 async def create_floor(
-        floor_in: FloorSchema,
+        floor_in: FloorCreate,
         session: CurrentAsyncSession,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
-    floor = FloorSchema(**floor_in.dict())
-    result = await floor_repo.create_floor(floor)
+    floor = Floor(**floor_in.dict())
+    result = await floor_repo.create_floor(floor_in)
     return result
 
 
-@router.put("/{floor_id}", response_model=FloorSchema)
+@router.put("/{floor_id}", response_model=FloorRead)
 async def update_floor(
         floor_id: int,
         floor_in: FloorUpdate,
