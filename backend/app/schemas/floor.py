@@ -10,7 +10,7 @@ class FloorUpdate(FloorCreate):
     pass
 
 
-class Floor(FloorCreate):
+class FloorRead(FloorCreate):
     id: int
     
     model_config = ConfigDict(from_attributes=True)
