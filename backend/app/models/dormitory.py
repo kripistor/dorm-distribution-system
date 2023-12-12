@@ -12,3 +12,4 @@ class Dormitory(Base):
     id: Mapped[int] = mapped_column(primary_key=True)
     name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     address: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    img: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
