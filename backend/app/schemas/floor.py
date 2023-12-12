@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class FloorCreate(BaseModel):
@@ -11,6 +11,6 @@ class FloorUpdate(FloorCreate):
 
 
 class Floor(FloorCreate):
-
-    class Config:
-        orm_mode = True
+    id: int
+    
+    model_config = ConfigDict(from_attributes=True)
