@@ -4,9 +4,11 @@ from typing import List
 from sqlalchemy import select, delete
 from sqlalchemy.exc import IntegrityError
 
+from app.models import Floor
 from app.models.dormitory import Dormitory
 from app.repo.repo import SQLAlchemyRepo
 from app.schemas.dormitory import DormitoryCreate, DormitoryUpdate
+from app.schemas.dormitory_statistics import DormitoryStatistics
 
 
 class DormitoryRepo(SQLAlchemyRepo):
@@ -51,3 +53,11 @@ class DormitoryRepo(SQLAlchemyRepo):
         except IntegrityError as e:
             logging.error(f"Error deleting dormitory: {e}")
             await self.session.rollback()
+
+    async def get_dormitory_statistic_by_id(self, dormitory_id: int):
+        query = await self.session.execute(
+            select(Dormitory).where(Dormitory.id == dormitory_id)
+        )
+        dormitory_statistic = query.scalar()
+        return DormitoryStatistics.model_validate(dormitory_statistic) if dormitory_statistic else None
+
