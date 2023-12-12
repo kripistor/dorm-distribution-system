@@ -1,6 +1,4 @@
-from pydantic import BaseModel
-
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class RoomCreate(BaseModel):
@@ -12,6 +10,6 @@ class RoomUpdate(RoomCreate):
     pass
 
 
-class Room(RoomCreate):
-    class Config:
-        orm_mode = True
+class RoomRead(RoomCreate):
+    id: int
+    model_config = ConfigDict(from_attributes=True)
