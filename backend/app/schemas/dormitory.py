@@ -1,4 +1,4 @@
-from pydantic import BaseModel
+from pydantic import BaseModel, ConfigDict
 
 
 class DormitoryCreate(BaseModel):
@@ -10,8 +10,7 @@ class DormitoryUpdate(DormitoryCreate):
     pass
 
 
-class Dormitory(DormitoryCreate):
+class DormitoryRead(DormitoryCreate):
     id: int
 
-    class Config:
-        orm_mode = True
+    model_config = ConfigDict(from_attributes=True)
