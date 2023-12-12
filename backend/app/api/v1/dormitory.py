@@ -31,7 +31,7 @@ async def create_dormitory(
         session: CurrentAsyncSession,
 ) -> Any:
     dormitory_repo: DormitoryRepo = DormitoryRepo(session)
-    dormitory = Dormitory(**dormitory_in.dict())
+    dormitory = Dormitory(**dormitory_in.model_dump())
     result = await dormitory_repo.create(dormitory)
     return result
 

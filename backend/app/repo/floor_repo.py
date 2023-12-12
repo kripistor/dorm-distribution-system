@@ -29,13 +29,13 @@ class FloorRepo(SQLAlchemyRepo):
         try:
             self.session.add(floor_in)
             await self.session.commit()
-            return floor_in.to_dto()
+            return floor_in
         except Exception as e:
             await self.session.rollback()
 
     async def update_floor(self, floor_id: int, floor_in: FloorUpdate) -> Floor:
         floor = await self.get_floor_by_id(floor_id)
-        update_data = floor_in.dict(exclude_unset=True)
+        update_data = floor_in.model_dump(exclude_unset=True)
         for field, value in update_data.items():
             setattr(floor, field, value)
         await self.session.commit()

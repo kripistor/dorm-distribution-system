@@ -3,22 +3,15 @@ from typing import List
 
 from sqlalchemy import select, delete
 
+from app.core.config import logger
 from app.models.room import Room
 from app.repo.repo import SQLAlchemyRepo
-from app.schemas.room import RoomCreate, RoomUpdate
+from app.schemas.room import RoomUpdate
 
 
 class RoomRepo(SQLAlchemyRepo):
 
-    async def get_room_by_floor_id(self, floor_id: int) -> List[Room]:
-        return (
-            await self.session.execute(
-                select(Room)
-                .where(Room.floor_id == floor_id)
-            )
-        ).scalars().all()
-
-    async def get_room(self, room_id: int| None = None, floor_id:int|None = None) -> Room:
+    async def get_room(self, room_id: int | None = None, floor_id: int | None = None) -> List[Room]:
         stmt = select(Room)
         if room_id:
             stmt = stmt.where(Room.id == room_id)
@@ -28,21 +21,19 @@ class RoomRepo(SQLAlchemyRepo):
             await self.session.execute(
                 stmt
             )
-        ).scalar()
+        ).scalars().all()
 
-    async def create_room(self, room_in: RoomCreate) -> Room:
+    async def create_room(self, room_in: Room) -> Room:
         try:
-            room = Room(**room_in.dict())
-            self.session.add(room)
+            self.session.add(room_in)
             await self.session.commit()
-            return room
+            return room_in
         except Exception as e:
-            logging.error(f"Error creating room: {e}")
             await self.session.rollback()
 
     async def update_room(self, room_id: int, room_in: RoomUpdate) -> Room:
-        room = await self.get_room_by_id(room_id)
-        update_data = room_in.dict(exclude_unset=True)
+        room = await self.get_room(room_id=room_id)
+        update_data = room_in.model_dump(exclude_unset=True)
         for field, value in update_data.items():
             setattr(room, field, value)
         await self.session.commit()

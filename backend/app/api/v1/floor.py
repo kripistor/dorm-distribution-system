@@ -32,8 +32,8 @@ async def create_floor(
         session: CurrentAsyncSession,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
-    floor = Floor(**floor_in.dict())
-    result = await floor_repo.create_floor(floor_in)
+    floor = Floor(**floor_in.model_dump())
+    result = await floor_repo.create_floor(floor)
     return result
 
 

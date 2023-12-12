@@ -35,7 +35,7 @@ class DormitoryRepo(SQLAlchemyRepo):
 
     async def update(self, dormitory_id: int, dormitory_in: DormitoryUpdate) -> Dormitory:
         dormitory: Dormitory = await self.get_by_id(dormitory_id)
-        update_data = dormitory_in.dict(exclude_unset=True)
+        update_data = dormitory_in.model_dump(exclude_unset=True)
         for field, value in update_data.items():
             setattr(dormitory, field, value)
         await self.session.commit()
