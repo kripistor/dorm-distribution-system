@@ -1,12 +1,13 @@
 from typing import Any, List
 
-from fastapi import APIRouter
+from fastapi import APIRouter, HTTPException
 from starlette.responses import Response
 
 from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.models.person_attached_room import PersonAttachedRoom
 from app.repo.person_attached_room_repo import PersonAttachedRoomRepo
+from app.repo.room_repo import RoomRepo
 from app.schemas.person_attached_room import PersonAttachedRoomRead, PersonAttachedRoomCreate
 
 router = APIRouter(prefix="/person_attached_rooms")
@@ -46,9 +47,15 @@ async def create_person_attached_room(
         session: CurrentAsyncSession,
 ) -> Any:
     person_attached_room_repo: PersonAttachedRoomRepo = PersonAttachedRoomRepo(session)
+    room_repo: RoomRepo = RoomRepo(session)
+
     person_attached_room = PersonAttachedRoom(**person_attached_room_in.model_dump())
+    room = room_repo.occupancy_result(person_attached_room)
+    if room:
+        raise HTTPException(status_code=400, detail="The room is full")
     result = await person_attached_room_repo.create_person_attached_room(person_attached_room)
     return result
+
 
 @router.delete("/")
 async def delete_person_attached_room(

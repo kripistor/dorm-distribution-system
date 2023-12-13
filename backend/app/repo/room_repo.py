@@ -41,7 +41,18 @@ class RoomRepo(SQLAlchemyRepo):
         await self.session.commit()
         return room
 
-
+    async def occupancy_result(self, person_attached_room_in: PersonAttachedRoom):
+        room_result = await self.session.execute(
+            select(Room).where(Room.id == person_attached_room_in.room_id)
+        )
+        room = room_result.scalar_one()
+        occupancy_result = await self.session.execute(
+            select(func.count(PersonAttachedRoom.id)).filter(PersonAttachedRoom.room_id == room.id)
+        )
+        occupancy = occupancy_result.scalar_one()
+        if occupancy == room.capacity:
+            return True
+        return False
 
     async def delete_room(self, room_id: int) -> None:
         stmt = delete(Room).where(
