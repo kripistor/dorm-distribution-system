@@ -1,8 +1,7 @@
-from uuid import UUID
+from typing import Optional, List
 
-from fastapi_users_db_sqlalchemy import GUID
-from sqlalchemy import String, DateTime, ForeignKey, Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy import String, Integer
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
 
@@ -13,3 +12,4 @@ class Dormitory(Base):
     name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     address: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     img: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    floors: Mapped[Optional[List["Floor"]]] = relationship("Floor", lazy="raise")

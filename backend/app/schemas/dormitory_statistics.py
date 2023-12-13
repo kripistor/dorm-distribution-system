@@ -9,7 +9,6 @@ from app.schemas.room import RoomRead
 
 
 class DormitoryStatistics(BaseModel):
-    dormitory_id: Optional[List[DormitoryRead]] = None
     floors: Optional[List[FloorRead]] = None
     rooms: Optional[List[RoomRead]] = None
     person_attached_rooms: Optional[List[PersonAttachedRoomRead]] = None

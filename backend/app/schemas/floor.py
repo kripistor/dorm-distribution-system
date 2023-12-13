@@ -1,6 +1,9 @@
-from typing import Any, Optional, List
+from typing import Optional, List
 
 from pydantic import BaseModel, ConfigDict
+
+from app.schemas.room import RoomRead
+
 
 class FloorCreate(BaseModel):
     name: str
@@ -13,5 +16,5 @@ class FloorUpdate(FloorCreate):
 
 class FloorRead(FloorCreate):
     id: int
-    
+    rooms: Optional[List[RoomRead]] = None
     model_config = ConfigDict(from_attributes=True)
