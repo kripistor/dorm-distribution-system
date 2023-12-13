@@ -13,7 +13,7 @@ logger = logging.getLogger(__name__)
 
 
 class Settings(BaseSettings):
-    PROJECT_NAME: str = "porsche-website"
+    PROJECT_NAME: str = "mirea-hackathon"
 
     SENTRY_DSN: Optional[HttpUrl] = None
 

@@ -1,10 +1,12 @@
 import logging
 from typing import List
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, func
 
-from app.core.config import logger
+from app.models import PersonAttachedRoom, Floor
 from app.models.room import Room
+from app.repo.dormitory_repo import DormitoryRepo
+from app.repo.floor_repo import FloorRepo
 from app.repo.repo import SQLAlchemyRepo
 from app.schemas.room import RoomUpdate
 
@@ -38,6 +40,8 @@ class RoomRepo(SQLAlchemyRepo):
             setattr(room, field, value)
         await self.session.commit()
         return room
+
+
 
     async def delete_room(self, room_id: int) -> None:
         stmt = delete(Room).where(

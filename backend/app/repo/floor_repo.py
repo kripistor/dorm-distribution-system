@@ -15,7 +15,7 @@ class FloorRepo(SQLAlchemyRepo):
                 select(Floor)
                 .where(Floor.dormitory_id == dormitory_id)
             )
-        ).scalars().all()
+        ).unique().scalars().all()
 
     async def get_floor_by_id(self, floor_id: int) -> Floor:
         return (

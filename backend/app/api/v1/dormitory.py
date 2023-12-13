@@ -7,6 +7,7 @@ from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.models.dormitory import Dormitory
 from app.repo.dormitory_repo import DormitoryRepo
+from app.repo.room_repo import RoomRepo
 from app.schemas.dormitory import DormitoryRead, DormitoryCreate, DormitoryUpdate, DormitoryStatistics
 
 router = APIRouter(prefix="/dormitories")
@@ -42,8 +43,7 @@ async def get_dormitory_statistic(
         session: CurrentAsyncSession,
 ) -> Any:
     dormitory_repo: DormitoryRepo = DormitoryRepo(session)
-    dormitory = await dormitory_repo.get_dormitory_stats_by_id(dormitory_id)
-    print(dormitory)
+    dormitory = await dormitory_repo.get_dormitory_statistics(dormitory_id)
     return dormitory
 
 

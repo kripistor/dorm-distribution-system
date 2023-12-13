@@ -1,7 +1,7 @@
 import logging
 from typing import List
 
-from sqlalchemy import select, delete
+from sqlalchemy import select, delete, func
 
 from app.models.person_attached_room import PersonAttachedRoom
 from app.repo.repo import SQLAlchemyRepo
@@ -57,3 +57,13 @@ class PersonAttachedRoomRepo(SQLAlchemyRepo):
         except Exception as e:
             logging.error(f"Error deleting person_attached_room: {e}")
             await self.session.rollback()
+
+    async def count_people_per_room(self):
+        result = (
+            await self.session.query(
+                PersonAttachedRoom.room_id, func.count(PersonAttachedRoom.id)
+            )
+            .group_by(PersonAttachedRoom.room_id)
+            .all()
+        )
+        return result
