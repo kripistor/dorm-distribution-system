@@ -1,4 +1,5 @@
 .dorms_list {
+    margin-top: 30px;
     display: flex;
     flex-direction: column;
     flex-wrap: wrap;
@@ -11,8 +12,10 @@
 .dorm_card {
     padding: 15px;
     border-radius: 10px;
-    background-color: #eef5fb;
+    border: 1px solid #000; /* Add border */
+    box-shadow: 10px 12px 9px 4px rgba(0, 0, 0, 0.3);
 }
+
 .dorm_gallery {
     display: flex;
     flex-direction: row;

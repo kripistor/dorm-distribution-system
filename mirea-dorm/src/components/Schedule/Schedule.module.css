@@ -1,0 +1,45 @@
+.scheduleContainer {
+    display: flex;
+    width: 100%; /* Set the width to the desired value */
+    max-width: 1440px; /* Set the maximum width to the desired value */
+    overflow-x: auto; /* Allow horizontal scrolling for overflow elements */
+    scrollbar-width: none; /* For Firefox */
+    padding-left: 48px;
+}
+
+.scheduleContainer::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari and Opera */
+}
+
+.schedule_card {
+    width: 360px;
+    height: 120px;
+    margin-right: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: #1100D0;
+}
+
+.timeInterval {
+    color: #000;
+    font-size: 20px;
+    font-style: normal;
+    font-weight: 500;
+    line-height: normal;
+}
+
+.institute {
+    color: #000;
+    text-align: center;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}

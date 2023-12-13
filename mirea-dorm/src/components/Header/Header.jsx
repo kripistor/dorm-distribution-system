@@ -3,7 +3,7 @@ import styles from "./Header.module.css";
 export default function Header({toggleSidebar}) {
 
     return (
-        <div className="container-fluid">
+        <div className={`container-fluid ${styles.header_border}`}>
             <header className={styles.header}>
                 <button onClick={toggleSidebar}>
                     <svg className={styles.header_menu} xmlns="http://www.w3.org/2000/svg" viewBox="0 0 24 24"
@@ -13,7 +13,7 @@ export default function Header({toggleSidebar}) {
                     </svg>
                 </button>
                 <a href="/" className={styles.header_logo}>
-                    <span>РТУ МИРЭА</span>
+                    <span>ОБЩЕЖИТИЕ.МИРЭА</span>
                 </a>
 
                 <a href="#">

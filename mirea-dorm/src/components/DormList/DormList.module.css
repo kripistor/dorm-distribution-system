@@ -1,0 +1,30 @@
+.dormListContainer {
+    display: flex;
+    width: 100%; /* Set the width to the desired value */
+    max-width: 1440px; /* Set the maximum width to the desired value */
+    overflow-x: auto; /* Allow horizontal scrolling for overflow elements */
+    scrollbar-width: none; /* For Firefox */
+    padding-left: 48px;
+}
+.dormListContainer::-webkit-scrollbar {
+    display: none; /* For Chrome, Safari and Opera */
+}
+
+.card {
+    width: 360px;
+    height: 180px;
+    margin-right: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    padding: 20px;
+    box-sizing: border-box;
+    color: white;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: #E4BF86;
+}
+a {
+    text-decoration: none !important;
+}
