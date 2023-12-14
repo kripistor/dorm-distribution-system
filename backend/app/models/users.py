@@ -5,7 +5,7 @@ from fastapi_users_db_sqlalchemy import SQLAlchemyBaseUserTableUUID
 from app.db import Base
 
 if TYPE_CHECKING:
-    from app.models.item import Item  # noqa: F401
+    from app.models.item import Item
 
 
 class User(SQLAlchemyBaseUserTableUUID, Base):

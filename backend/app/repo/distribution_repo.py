@@ -20,8 +20,6 @@ class DistributionRepo(SQLAlchemyRepo):
             for floor in floors
             for room in sorted(floor.rooms, key=lambda room: room.id)
         ]
-
-        # Retrieve and sort the users
         users = await self.session.execute(
             select(UserProfile).where(UserProfile.user_id.in_(user_ids))
         )
@@ -31,7 +29,6 @@ class DistributionRepo(SQLAlchemyRepo):
 
         person_attached_rooms = []
         for user in users:
-            # Find a suitable room for the user
             for room in rooms:
                 occupants = await self.session.execute(
                     select(PersonAttachedRoom).where(
@@ -41,7 +38,6 @@ class DistributionRepo(SQLAlchemyRepo):
                 occupants = occupants.scalars().all()
 
                 if len(occupants) < room.capacity:
-                    # The room is not full and either empty or contains users of the same gender as the current user
                     for occupant in occupants:
                         occupant_user_profile = await self.session.execute(
                             select(UserProfile).where(
@@ -52,7 +48,6 @@ class DistributionRepo(SQLAlchemyRepo):
                         if occupant_user_profile.gender != user.gender:
                             break
                     else:
-                        # Check if the user is already in a room
                         existing_room = await self.session.execute(
                             select(PersonAttachedRoom).where(
                                 PersonAttachedRoom.user_id == user.user_id
@@ -60,7 +55,6 @@ class DistributionRepo(SQLAlchemyRepo):
                         )
                         existing_room = existing_room.scalars().first()
                         if existing_room is not None:
-                            # The user is already in a room, skip to the next user
                             break
 
                         person_attached_room = PersonAttachedRoom(

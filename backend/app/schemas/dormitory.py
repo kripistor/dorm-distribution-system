@@ -8,7 +8,7 @@ class DormitoryCreate(BaseModel):
     address: str
     img: str
     scheme: str
-    description:str
+    description: str
 
 
 class DormitoryUpdate(DormitoryCreate):

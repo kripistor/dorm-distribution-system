@@ -21,9 +21,7 @@ class DormitoryRepo(SQLAlchemyRepo):
             (
                 await self.session.execute(
                     select(Dormitory)
-                    .options(
-                        joinedload(Dormitory.floors)
-                    )  # Use joinedload to load the floors
+                    .options(joinedload(Dormitory.floors))
                     .where(Dormitory.id == dormitory_id)
                 )
             )

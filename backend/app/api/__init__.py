@@ -7,7 +7,7 @@ from app.api.v1 import (
     person_attached_room,
     user_profile,
     distribution,
-    document
+    document,
 )
 
 api_router = APIRouter()

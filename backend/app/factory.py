@@ -49,7 +49,6 @@ def setup_routers(app: FastAPI, fastapi_users: FastAPIUsers) -> None:
         prefix=f"{settings.API_PATH}/users",
         tags=["users"],
     )
-    # The following operation needs to be at the end of this function
     use_route_names_as_operation_ids(app)
 
 

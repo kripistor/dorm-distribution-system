@@ -11,10 +11,8 @@ from app.db import Base
 class UserProfile(Base):
     __tablename__ = "user_profiles"
     id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
-    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id",ondelete="CASCADE"))
-    card_number: Mapped[str] = mapped_column(
-        String, index=True, nullable=False
-    )
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id", ondelete="CASCADE"))
+    card_number: Mapped[str] = mapped_column(String, index=True, nullable=False)
     name: Mapped[str] = mapped_column(String, index=True, nullable=False)
     birth_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     phone: Mapped[str] = mapped_column(String, nullable=False)
