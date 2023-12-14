@@ -1,8 +1,8 @@
-"""Init
+"""init
 
-Revision ID: 49ba71779220
+Revision ID: 0e37b6814f89
 Revises: 
-Create Date: 2023-12-13 06:26:49.778479
+Create Date: 2023-12-14 10:40:58.371202
 
 """
 from alembic import op
@@ -11,7 +11,7 @@ import fastapi_users_db_sqlalchemy
 
 
 # revision identifiers, used by Alembic.
-revision = '49ba71779220'
+revision = '0e37b6814f89'
 down_revision = None
 branch_labels = None
 depends_on = None
@@ -24,11 +24,13 @@ def upgrade():
     sa.Column('name', sa.String(length=32), nullable=False),
     sa.Column('address', sa.String(length=32), nullable=False),
     sa.Column('img', sa.String(length=32), nullable=False),
+    sa.Column('scheme', sa.String(length=32), nullable=False),
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_dormitories_address'), 'dormitories', ['address'], unique=False)
     op.create_index(op.f('ix_dormitories_img'), 'dormitories', ['img'], unique=False)
     op.create_index(op.f('ix_dormitories_name'), 'dormitories', ['name'], unique=False)
+    op.create_index(op.f('ix_dormitories_scheme'), 'dormitories', ['scheme'], unique=False)
     op.create_table('users',
     sa.Column('id', fastapi_users_db_sqlalchemy.generics.GUID(), nullable=False),
     sa.Column('email', sa.String(length=320), nullable=False),
@@ -39,6 +41,14 @@ def upgrade():
     sa.PrimaryKeyConstraint('id')
     )
     op.create_index(op.f('ix_users_email'), 'users', ['email'], unique=True)
+    op.create_table('dormitory_photos',
+    sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
+    sa.Column('dormitory_id', sa.Integer(), nullable=False),
+    sa.Column('img', sa.String(length=32), nullable=False),
+    sa.ForeignKeyConstraint(['dormitory_id'], ['dormitories.id'], ),
+    sa.PrimaryKeyConstraint('id')
+    )
+    op.create_index(op.f('ix_dormitory_photos_img'), 'dormitory_photos', ['img'], unique=False)
     op.create_table('floors',
     sa.Column('id', sa.Integer(), autoincrement=True, nullable=False),
     sa.Column('name', sa.String(length=32), nullable=False),
@@ -59,6 +69,8 @@ def upgrade():
     sa.Column('transfer_date', sa.DateTime(timezone=True), nullable=True),
     sa.Column('birth_place', sa.String(length=32), nullable=True),
     sa.Column('address', sa.String(length=32), nullable=True),
+    sa.Column('concession', sa.Boolean(), nullable=False),
+    sa.Column('gender', sa.String(length=32), nullable=True),
     sa.ForeignKeyConstraint(['user_id'], ['users.id'], ),
     sa.PrimaryKeyConstraint('id')
     )
@@ -91,8 +103,11 @@ def downgrade():
     op.drop_table('user_profiles')
     op.drop_index(op.f('ix_floors_name'), table_name='floors')
     op.drop_table('floors')
+    op.drop_index(op.f('ix_dormitory_photos_img'), table_name='dormitory_photos')
+    op.drop_table('dormitory_photos')
     op.drop_index(op.f('ix_users_email'), table_name='users')
     op.drop_table('users')
+    op.drop_index(op.f('ix_dormitories_scheme'), table_name='dormitories')
     op.drop_index(op.f('ix_dormitories_name'), table_name='dormitories')
     op.drop_index(op.f('ix_dormitories_img'), table_name='dormitories')
     op.drop_index(op.f('ix_dormitories_address'), table_name='dormitories')
