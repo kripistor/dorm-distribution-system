@@ -25,3 +25,4 @@ class UserProfile(Base):
     address: Mapped[str] = mapped_column(String, nullable=True)
     concession: Mapped[bool] = mapped_column(Boolean, default=False)
     gender: Mapped[str] = mapped_column(String, nullable=True)
+    course: Mapped[int] = mapped_column(Integer, nullable=True)

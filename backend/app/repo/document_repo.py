@@ -119,10 +119,11 @@ class DocumentRepo(SQLAlchemyRepo):
                             "Адрес проживания",
                             "Инвалидность",
                             "Пол",
+                            "Номер Курс"
                         ]
                         floor_sheet.append(user_info)
                         for row in floor_sheet[
-                            f"A{floor_sheet.max_row}":f"L{floor_sheet.max_row}"
+                            f"A{floor_sheet.max_row}":f"M{floor_sheet.max_row}"
                         ]:
                             for cell in row:
                                 cell.font = bold_font
@@ -141,6 +142,7 @@ class DocumentRepo(SQLAlchemyRepo):
                                 user.address,
                                 user.concession,
                                 user.gender,
+                                user.course
                             ]
                         )
 

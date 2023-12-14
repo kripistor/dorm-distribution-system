@@ -17,6 +17,7 @@ class UserProfileCreate(BaseModel):
     address: str
     concession: bool
     gender: str
+    course: int
 
 
 class UserProfileUpdate(UserProfileCreate):
