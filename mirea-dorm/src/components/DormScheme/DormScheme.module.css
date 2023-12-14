@@ -1,0 +1,10 @@
+.scheme_image img {
+    width: 1000px;
+    /*height: 100%;*/
+    object-fit: cover;
+    object-position: center;
+}
+.scheme_image {
+    display: flex;
+    justify-content: center;
+}

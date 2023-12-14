@@ -1,0 +1,77 @@
+.header {
+    overflow: hidden;
+    padding: 10px 0;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+
+button {
+    background: none;
+    border: none;
+    outline: none;
+    cursor: pointer;
+}
+.header_menu {
+    float: left;
+    cursor: pointer;
+    margin-left: 8px;
+    margin-top: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.header_logo {
+    text-decoration: none;
+    color: #000;
+    font-size: 32px;
+    font-style: normal;
+    font-weight: 700;
+    line-height: normal;
+}
+
+.header_search {
+    float: right;
+    cursor: pointer;
+    margin-right: 8px;
+    margin-top: 8px;
+    width: 24px;
+    height: 24px;
+}
+
+.header_border{
+    border-bottom: 1px solid #000;
+}
+@media screen and (max-width: 768px) {
+    .Header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+    }
+
+    .Header-menu {
+        float: left;
+        cursor: pointer;
+        margin-left: 8px;
+        margin-top: 8px;
+        width: 24px;
+        height: 24px;
+    }
+
+    .Header-logo {
+        display: block;
+        margin-top: 14px;
+        max-width: 240px;
+        max-height: 16px;
+    }
+
+    .Header-search {
+        float: right;
+        cursor: pointer;
+        margin-right: 8px;
+        margin-top: 8px;
+        width: 24px;
+        height: 24px;
+    }
+}

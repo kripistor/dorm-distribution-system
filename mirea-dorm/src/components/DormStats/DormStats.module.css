@@ -1,0 +1,78 @@
+.dormStatsContainer {
+    display: flex;
+    width: 100%;
+    max-width: 1440px;
+    scrollbar-width: none;
+    overflow: visible;
+    max-height: 140px;
+    padding-left: 48px;
+}
+
+.dormStatsContainer::-webkit-scrollbar {
+    display: none;
+}
+
+.dorm_stats {
+    position: relative;
+    max-width: 324px;
+
+}
+.dorm_card {
+    /*position: relative;*/
+    width: 264px;
+    margin-right: 60px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    box-sizing: border-box;
+    color: #000000;
+    border-radius: 15px;
+}
+
+.tooltip {
+    display: none;
+    flex-direction: column;
+    gap: 10px;
+    width: 346px;
+    flex-shrink: 0;
+    position: relative;
+    left: 100px;
+    top: -70px;
+    z-index: 1;
+    border-radius: 15px;
+    border: 1px solid #000;
+    background: var(--mireamirea-background, #F3F4F6);
+    padding: 25px;
+}
+.stats_card {
+    /*backdrop-filter: blur(10px);*/
+    display: flex;
+    flex-direction: row;
+    justify-content: space-around;
+}
+
+.stats_card > div:first-of-type{
+    width: 120px;
+    height: 50px;
+}
+
+.dorm_stats:hover .tooltip {
+    display: flex;
+}
+.stats_card_heading {
+    color: #000;
+    font-size: 18px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+    margin-bottom: 5px;
+}
+
+.stats_card_value {
+    color: #000;
+    font-size: 16px;
+    font-style: normal;
+    font-weight: 400;
+    line-height: normal;
+}
