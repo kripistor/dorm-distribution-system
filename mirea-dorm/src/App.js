@@ -9,6 +9,7 @@ import ProfilePage from "./pages/Profile/ProfilePage";
 import UsersTable from "./components/UsersTable/UsersTable";
 import Profile from "./components/Profile/Profile";
 import UsersPage from "./pages/UsersList/UsersPage";
+import DocsPage from "./pages/DocsPage/DocsPage";
 
 
 function App() {
@@ -30,6 +31,8 @@ function App() {
                        element={<DormPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
                 <Route path="/users"
                        element={<UsersPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
+                <Route path="/documents"
+                       element={<DocsPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
             </Routes>
         </BrowserRouter>
     );
