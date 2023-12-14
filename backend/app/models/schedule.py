@@ -10,5 +10,5 @@ class Shedule(Base):
     institute_name: Mapped[str] = mapped_column(
         String(length=32), index=True, nullable=False
     )
-    interval: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
-    color: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    interval: Mapped[str] = mapped_column(String, index=True, nullable=False)
+    color: Mapped[str] = mapped_column(String, index=True, nullable=False)

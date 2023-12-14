@@ -11,19 +11,19 @@ from app.db import Base
 class UserProfile(Base):
     __tablename__ = "user_profiles"
     id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
-    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id"))
+    user_id: Mapped[UUID] = mapped_column(ForeignKey("users.id",ondelete="CASCADE"))
     card_number: Mapped[str] = mapped_column(
         String(length=32), index=True, nullable=False
     )
-    name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    name: Mapped[str] = mapped_column(String, index=True, nullable=False)
     birth_date: Mapped[datetime] = mapped_column(DateTime(timezone=True), nullable=True)
     phone: Mapped[str] = mapped_column(String, nullable=False)
-    grant_order_number: Mapped[str] = mapped_column(String(length=32), nullable=True)
-    transfer_order_number: Mapped[str] = mapped_column(String(length=32), nullable=True)
+    grant_order_number: Mapped[str] = mapped_column(String, nullable=True)
+    transfer_order_number: Mapped[str] = mapped_column(String, nullable=True)
     transfer_date: Mapped[datetime] = mapped_column(
         DateTime(timezone=True), nullable=True
     )
-    birth_place: Mapped[str] = mapped_column(String(length=32), nullable=True)
-    address: Mapped[str] = mapped_column(String(length=32), nullable=True)
+    birth_place: Mapped[str] = mapped_column(String, nullable=True)
+    address: Mapped[str] = mapped_column(String, nullable=True)
     concession: Mapped[bool] = mapped_column(Boolean, default=False)
-    gender: Mapped[str] = mapped_column(String(length=32), nullable=True)
+    gender: Mapped[str] = mapped_column(String, nullable=True)

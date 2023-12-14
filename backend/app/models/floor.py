@@ -10,8 +10,8 @@ from app.schemas.floor import FloorRead
 class Floor(Base):
     __tablename__ = "floors"
     id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
-    name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
-    dormitory_id: Mapped[int] = mapped_column(Integer, ForeignKey("dormitories.id"))
+    name: Mapped[str] = mapped_column(String, index=True, nullable=False)
+    dormitory_id: Mapped[int] = mapped_column(Integer, ForeignKey("dormitories.id",ondelete="CASCADE"))
     rooms: Mapped[Optional[List["Room"]]] = relationship("Room", lazy="joined")
 
     def to_dto(self) -> FloorRead:

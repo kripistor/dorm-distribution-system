@@ -1,7 +1,5 @@
-from typing import Optional, List
-
 from sqlalchemy import String, Integer, ForeignKey
-from sqlalchemy.orm import Mapped, mapped_column, relationship
+from sqlalchemy.orm import Mapped, mapped_column
 
 from app.db import Base
 
@@ -9,5 +7,5 @@ from app.db import Base
 class DormitoryPhoto(Base):
     __tablename__ = "dormitory_photos"
     id: Mapped[int] = mapped_column(Integer, autoincrement=True, primary_key=True)
-    dormitory_id: Mapped[int] = mapped_column(Integer, ForeignKey("dormitories.id"))
-    img: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    dormitory_id: Mapped[int] = mapped_column(Integer, ForeignKey("dormitories.id", ondelete="CASCADE"))
+    img: Mapped[str] = mapped_column(String, index=True, nullable=False)
