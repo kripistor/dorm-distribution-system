@@ -12,18 +12,15 @@ from app.schemas.room import RoomUpdate
 
 
 class RoomRepo(SQLAlchemyRepo):
-
-    async def get_room(self, room_id: int | None = None, floor_id: int | None = None) -> List[Room]:
+    async def get_room(
+        self, room_id: int | None = None, floor_id: int | None = None
+    ) -> List[Room]:
         stmt = select(Room)
         if room_id:
             stmt = stmt.where(Room.id == room_id)
         if floor_id:
             stmt = stmt.where(Room.floor_id == floor_id)
-        return (
-            await self.session.execute(
-                stmt
-            )
-        ).scalars().all()
+        return (await self.session.execute(stmt)).scalars().all()
 
     async def create_room(self, room_in: Room) -> Room:
         try:
@@ -47,7 +44,9 @@ class RoomRepo(SQLAlchemyRepo):
         )
         room = room_result.scalar_one()
         occupancy_result = await self.session.execute(
-            select(func.count(PersonAttachedRoom.id)).filter(PersonAttachedRoom.room_id == room.id)
+            select(func.count(PersonAttachedRoom.id)).filter(
+                PersonAttachedRoom.room_id == room.id
+            )
         )
         occupancy = occupancy_result.scalar_one()
         if occupancy == room.capacity:
@@ -55,9 +54,7 @@ class RoomRepo(SQLAlchemyRepo):
         return False
 
     async def delete_room(self, room_id: int) -> None:
-        stmt = delete(Room).where(
-            Room.id == room_id
-        )
+        stmt = delete(Room).where(Room.id == room_id)
         try:
             await self.session.execute(stmt)
             await self.session.commit()

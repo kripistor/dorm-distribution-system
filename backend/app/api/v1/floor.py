@@ -14,10 +14,10 @@ router = APIRouter(prefix="/floors")
 
 @router.get("/{dormitory_id}", response_model=List[FloorRead])
 async def get_dormitory_floor(
-        dormitory_id: int,
-        response: Response,
-        session: CurrentAsyncSession,
-        request_params: ItemRequestParams,
+    dormitory_id: int,
+    response: Response,
+    session: CurrentAsyncSession,
+    request_params: ItemRequestParams,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
     floors = await floor_repo.get_floor_by_dormitory_id(dormitory_id)
@@ -28,8 +28,8 @@ async def get_dormitory_floor(
 
 @router.post("", response_model=FloorRead, status_code=201)
 async def create_floor(
-        floor_in: FloorCreate,
-        session: CurrentAsyncSession,
+    floor_in: FloorCreate,
+    session: CurrentAsyncSession,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
     floor = Floor(**floor_in.model_dump())
@@ -39,9 +39,9 @@ async def create_floor(
 
 @router.put("/{floor_id}", response_model=FloorRead)
 async def update_floor(
-        floor_id: int,
-        floor_in: FloorUpdate,
-        session: CurrentAsyncSession,
+    floor_id: int,
+    floor_in: FloorUpdate,
+    session: CurrentAsyncSession,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
     result = await floor_repo.update_floor(floor_id, floor_in)
@@ -50,8 +50,8 @@ async def update_floor(
 
 @router.delete("/{floor_id}")
 async def delete_floor(
-        floor_id: int,
-        session: CurrentAsyncSession,
+    floor_id: int,
+    session: CurrentAsyncSession,
 ) -> Any:
     floor_repo: FloorRepo = FloorRepo(session)
     result = await floor_repo.delete_floor(floor_id)

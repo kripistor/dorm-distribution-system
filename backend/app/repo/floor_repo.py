@@ -11,18 +11,19 @@ from app.schemas.floor import FloorCreate, FloorUpdate
 class FloorRepo(SQLAlchemyRepo):
     async def get_floor_by_dormitory_id(self, dormitory_id: int) -> List[Floor]:
         return (
-            await self.session.execute(
-                select(Floor)
-                .where(Floor.dormitory_id == dormitory_id)
+            (
+                await self.session.execute(
+                    select(Floor).where(Floor.dormitory_id == dormitory_id)
+                )
             )
-        ).unique().scalars().all()
+            .unique()
+            .scalars()
+            .all()
+        )
 
     async def get_floor_by_id(self, floor_id: int) -> Floor:
         return (
-            await self.session.execute(
-                select(Floor)
-                .where(Floor.id == floor_id)
-            )
+            await self.session.execute(select(Floor).where(Floor.id == floor_id))
         ).scalar()
 
     async def create_floor(self, floor_in: Floor) -> Floor:
@@ -42,9 +43,7 @@ class FloorRepo(SQLAlchemyRepo):
         return floor
 
     async def delete_floor(self, floor_id: int) -> None:
-        stmt = delete(Floor).where(
-            Floor.id == floor_id
-        )
+        stmt = delete(Floor).where(Floor.id == floor_id)
         try:
             await self.session.execute(stmt)
             await self.session.commit()

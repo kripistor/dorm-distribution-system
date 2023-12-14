@@ -12,4 +12,8 @@ class Dormitory(Base):
     name: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     address: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     img: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
+    scheme: Mapped[str] = mapped_column(String(length=32), index=True, nullable=False)
     floors: Mapped[Optional[List["Floor"]]] = relationship("Floor", lazy="raise")
+    dormitory_photos: Mapped[Optional[List["DormitoryPhoto"]]] = relationship(
+        "DormitoryPhoto", lazy="raise"
+    )

@@ -8,9 +8,21 @@ from app.schemas.person_attached_room import PersonAttachedRoomRead
 from app.schemas.room import RoomRead
 
 
+class FloorStatistics(BaseModel):
+    floor_id: int
+    floor_name: str
+    occupied_space: int
+    total_space: int
+    rooms_free: int
+    model_config = ConfigDict(from_attributes=True)
+
+
 class DormitoryStatistics(BaseModel):
-    floors: Optional[List[FloorRead]] = None
-    rooms: Optional[List[RoomRead]] = None
-    person_attached_rooms: Optional[List[PersonAttachedRoomRead]] = None
+    dorm_id: int
+    dorm_name: str
+    dorm_address: str
+    occupied_space: int
+    total_space: int
+    floors: Optional[List[FloorStatistics]] = None
 
     model_config = ConfigDict(from_attributes=True)

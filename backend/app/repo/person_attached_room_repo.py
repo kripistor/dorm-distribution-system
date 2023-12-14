@@ -9,27 +9,22 @@ from app.schemas.person_attached_room import PersonAttachedRoomUpdate
 
 
 class PersonAttachedRoomRepo(SQLAlchemyRepo):
-
     async def get_all(self) -> List[PersonAttachedRoom]:
-        return (
-            await self.session.execute(
-                select(PersonAttachedRoom)
-            )
-        ).scalars().all()
+        return (await self.session.execute(select(PersonAttachedRoom))).scalars().all()
 
-    async def get_by_id(self, user_id: int | None = None, room_id: int | None = None) -> PersonAttachedRoom:
+    async def get_by_id(
+        self, user_id: int | None = None, room_id: int | None = None
+    ) -> PersonAttachedRoom:
         stmt = select(PersonAttachedRoom)
         if user_id:
             stmt = stmt.where(PersonAttachedRoom.user_id == user_id)
         if room_id:
             stmt = stmt.where(PersonAttachedRoom.room_id == room_id)
-        return (
-            await self.session.execute(
-                stmt
-            )
-        ).scalars().all()
+        return (await self.session.execute(stmt)).scalars().all()
 
-    async def create_person_attached_room(self, person_attached_room_in: PersonAttachedRoom) -> PersonAttachedRoom:
+    async def create_person_attached_room(
+        self, person_attached_room_in: PersonAttachedRoom
+    ) -> PersonAttachedRoom:
         try:
             self.session.add(person_attached_room_in)
             await self.session.commit()
@@ -37,7 +32,9 @@ class PersonAttachedRoomRepo(SQLAlchemyRepo):
         except Exception as e:
             await self.session.rollback()
 
-    async def update(self, user_id, person_attached_room_in: PersonAttachedRoomUpdate) -> PersonAttachedRoom:
+    async def update(
+        self, user_id, person_attached_room_in: PersonAttachedRoomUpdate
+    ) -> PersonAttachedRoom:
         person_attached_room: PersonAttachedRoom = await self.get_by_id(user_id)
         update_data = person_attached_room_in.model_dump(exclude_unset=True)
         for field, value in update_data.items():
@@ -45,7 +42,9 @@ class PersonAttachedRoomRepo(SQLAlchemyRepo):
         await self.session.commit()
         return person_attached_room
 
-    async def delete(self, user_id: int | None = None, room_id: int | None = None) -> None:
+    async def delete(
+        self, user_id: int | None = None, room_id: int | None = None
+    ) -> None:
         stmt = delete(PersonAttachedRoom)
         if user_id:
             stmt = stmt.where(PersonAttachedRoom.user_id == user_id)
