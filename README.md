@@ -21,3 +21,8 @@ docker compose up -d --build
 ```bash
 npm start
 ```
+
+
+## Прототип
+
+https://dorm.mirea.hm4nx.ru
