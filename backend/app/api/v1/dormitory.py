@@ -7,7 +7,6 @@ from app.deps.db import CurrentAsyncSession
 from app.deps.request_params import ItemRequestParams
 from app.models.dormitory import Dormitory
 from app.repo.dormitory_repo import DormitoryRepo
-from app.repo.room_repo import RoomRepo
 from app.schemas.dormitory import DormitoryRead, DormitoryCreate, DormitoryUpdate
 from app.schemas.dormitory_statistics import DormitoryStatistics
 
@@ -24,6 +23,15 @@ async def get_dormitories(
     dormitories = await dormitory_repo.get_all()
     if not dormitories:
         return []
+    return dormitories
+
+
+@router.get("/all_stats", response_model=List[DormitoryStatistics])
+async def get_dormitories_statistic(
+    session: CurrentAsyncSession,
+) -> Any:
+    dormitory_repo: DormitoryRepo = DormitoryRepo(session)
+    dormitories = await dormitory_repo.get_all_dormitories_statistics()
     return dormitories
 
 
@@ -56,7 +64,7 @@ async def get_dormitory_statistic(
     session: CurrentAsyncSession,
 ) -> Any:
     dormitory_repo: DormitoryRepo = DormitoryRepo(session)
-    dormitory = await dormitory_repo.get_dormitory_statistics(dormitory_id)
+    dormitory = await dormitory_repo.get_dormitory_statistics_by_id(dormitory_id)
     return dormitory
 
 

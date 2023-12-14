@@ -119,7 +119,7 @@ class DocumentRepo(SQLAlchemyRepo):
                             "Адрес проживания",
                             "Инвалидность",
                             "Пол",
-                            "Номер Курс"
+                            "Номер Курс",
                         ]
                         floor_sheet.append(user_info)
                         for row in floor_sheet[
@@ -142,7 +142,7 @@ class DocumentRepo(SQLAlchemyRepo):
                                 user.address,
                                 user.concession,
                                 user.gender,
-                                user.course
+                                user.course,
                             ]
                         )
 
