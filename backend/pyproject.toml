@@ -21,6 +21,8 @@ starlette-exporter = "^0.16.0"
 sentry-sdk = { extras = ["fastapi"], version = "^1.26.0" }
 aioboto3 = "^11.2.0"
 pydantic-settings = "^2.0.1"
+openpyxl = "^3.0.9"
+
 
 [tool.poetry.group.dev.dependencies]
 black = "^23.3.0"

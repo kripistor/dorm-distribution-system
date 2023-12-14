@@ -105,6 +105,8 @@ class DormitoryRepo(SQLAlchemyRepo):
                 select(func.sum(Room.capacity)).filter(Room.floor_id == floor.id)
             )
             floor_total_space = floor_total_space_result.scalar()
+            if floor_total_space is None:
+                floor_total_space = 0
             floor_occupied_space_result = await self.session.execute(
                 select(func.count(PersonAttachedRoom.id))
                 .join(Room)
@@ -128,7 +130,7 @@ class DormitoryRepo(SQLAlchemyRepo):
                     floor_id=floor.id,
                     floor_name=floor.name,
                     occupied_space=floor_occupied_space,
-                    total_space=floor_total_space,
+                    total_space=int(floor_total_space),
                     rooms_free=floor_rooms_free,
                 )
             )

@@ -14,7 +14,7 @@ class DistributionRepo(SQLAlchemyRepo):
     ) -> List[PersonAttachedRoom]:
         dormitory_repo: DormitoryRepo = DormitoryRepo(self.session)
         dormitory = await dormitory_repo.get_by_id(dormitory_id)
-        floors = sorted(dormitory.floors, key=lambda floor: floor.id)
+        floors = sorted(dormitory.floors, key=lambda floor: int(floor.name))
         rooms = [
             room
             for floor in floors
