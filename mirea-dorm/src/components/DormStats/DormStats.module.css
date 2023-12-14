@@ -62,7 +62,6 @@
 }
 .stats_card_heading {
     color: #000;
-    font-family: "Arial Narrow" , sans-serif;
     font-size: 18px;
     font-style: normal;
     font-weight: 400;
@@ -72,7 +71,6 @@
 
 .stats_card_value {
     color: #000;
-    font-family: "Arial Narrow" , sans-serif;
     font-size: 16px;
     font-style: normal;
     font-weight: 400;

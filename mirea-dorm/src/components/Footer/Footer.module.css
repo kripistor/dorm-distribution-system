@@ -1,9 +1,17 @@
 footer {
     height: 300px;
     background: #103663;
+    display: flex;
+    flex-direction: column;
 }
 .mirea_logo {
     width: 100px;
     margin-top: 36px;
     margin-left: 48px;
+}
+.contactInfo {
+    display: flex;
+    flex-direction: row;
+    color: white;
+    justify-content: space-evenly;
 }

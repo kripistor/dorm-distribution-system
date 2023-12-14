@@ -9,7 +9,7 @@ export default function LoginForm() {
         <div className="flex justify-content-center align-content-center">
             <div>
                 <img src={mirea_logo} alt="РТУ МИРЭА" className={`${styles.auth_logo}`}/>
-                <h1 className="text-center">Общежитие.мирэа</h1>
+                <h1 className="text-center">Общежитие.Мирэа</h1>
                 <hr/>
                 <h3 className="text-center mb-4">Авторизация</h3>
             </div>

@@ -1,16 +1,17 @@
 import React from 'react';
 import styles from './BatteryIndicator.module.css';
+import useCSSVarCls from "antd/es/config-provider/hooks/useCSSVarCls";
 
 const BatteryIndicator = ({percent}) => {
     const getBatteryColor = () => {
         if (percent >= 70) {
-            return '#FF5D5D';
+            return "var(--red_battery)";
         } else if (percent >= 50) {
-            return '#FFAD4D';
+            return "var(--orange_battery)";
         } else if (percent >= 30) {
-            return '#FFD954';
+            return "var(--yellow_battery)";
         } else {
-            return '#2CAA00';
+            return "var(--green_battery)";
         }
     };
 
@@ -19,7 +20,7 @@ const BatteryIndicator = ({percent}) => {
         const numBars = 10;
 
         if (percent === 0) {
-            bars.push(<div key={0} className={styles.battery_bar} style={{backgroundColor: 'green'}}></div>);
+            bars.push(<div key={0} className={styles.battery_bar} style={{backgroundColor: "var(--green_battery)"}}></div>);
             for (let i = 1; i < numBars; i++) {
                 bars.push(<div key={i} className={styles.battery_bar} style={{backgroundColor: 'transparent'}}></div>);
             }

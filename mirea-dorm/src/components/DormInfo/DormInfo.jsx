@@ -1,4 +1,5 @@
 import styles from "./DormInfo.module.css";
+import DormScheme from "../DormScheme/DormScheme";
 
 
 export default function DormInfo({spec}) {
@@ -8,12 +9,9 @@ export default function DormInfo({spec}) {
             <div className={styles.dorm_card}>
                 <p>Общежитие по адресу: <span className={styles.dorm_address}>{spec.address}</span></p>
                 <div className={styles.dorm_gallery}>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
-                    <img src="https://placehold.co/360x200" alt="img1"/>
+                    {spec.photos.map((photo) => (
+                        <img src={photo.image_url} alt="img1"/>
+                    ))}
                 </div>
                 <div className={styles.dorm_info}>
                     <div className={styles.dorm_info_item}>
@@ -26,6 +24,9 @@ export default function DormInfo({spec}) {
                         <span>{spec.description}</span>
                     </div>
                 </div>
+        <hr/>
+                <h4>План этажа общежития:</h4>
+                <DormScheme scheme={spec.scheme}/>
             </div>
 
         </>

@@ -24,8 +24,9 @@ function Sidebar({isOpen, toggleSidebar}) {
         (props) => <Link to="#" onClick={toggleSidebar} {...props}>Размер платы</Link>,
         (props) => <Link to="#" onClick={toggleSidebar} {...props}>Статистика</Link>,
         (props) => <Link to="#" onClick={toggleSidebar} {...props}>Отчётность</Link>,
+        (props) => <Link to="/users" onClick={toggleSidebar} {...props}>Студенты</Link>,
         (props) => <Link to="/login" onClick={toggleSidebar} {...props}>Авторизация</Link>,
-        (props) => <Link to="#" onClick={toggleSidebar} {...props}>Поиск</Link>,
+        (props) => <Link to="/users" onClick={toggleSidebar} {...props}>Поиск</Link>,
     ];
     return (
         <div>

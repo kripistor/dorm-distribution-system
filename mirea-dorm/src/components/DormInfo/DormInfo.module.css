@@ -24,6 +24,9 @@
     align-content: center;
     gap: 30px;
 }
+.dorm_gallery img {
+    width: 350px;
+}
 
 .dorm_address {
     font-weight: 500;
