@@ -1,9 +1,8 @@
 from datetime import datetime
 from uuid import UUID
 
-from fastapi_users_db_sqlalchemy import GUID
 from sqlalchemy import String, DateTime, ForeignKey, Integer, Boolean
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
 
@@ -26,3 +25,10 @@ class UserProfile(Base):
     concession: Mapped[bool] = mapped_column(Boolean, default=False)
     gender: Mapped[str] = mapped_column(String, nullable=True)
     course: Mapped[int] = mapped_column(Integer, nullable=True)
+
+    room_distribution: Mapped["PersonAttachedRoom"] = relationship(
+        "PersonAttachedRoom",
+        lazy="joined",
+        primaryjoin="PersonAttachedRoom.user_id == UserProfile.user_id",
+        foreign_keys="PersonAttachedRoom.user_id",
+    )

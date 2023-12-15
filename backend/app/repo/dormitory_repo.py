@@ -73,7 +73,17 @@ class DormitoryRepo(SQLAlchemyRepo):
             else None
         )
 
-    async def get_dormitory_statistics(self, dormitory_id: int) -> DormitoryStatistics:
+    async def get_all_dormitories_statistics(self) -> List[DormitoryStatistics]:
+        dormitories = await self.get_all()
+        statistics = []
+        for dormitory in dormitories:
+            statistic = await self.get_dormitory_statistics_by_id(int(dormitory.id))
+            statistics.append(statistic)
+        return statistics
+
+    async def get_dormitory_statistics_by_id(
+        self, dormitory_id: int
+    ) -> DormitoryStatistics:
         dormitory_result = await self.session.execute(
             select(Dormitory)
             .options(joinedload(Dormitory.floors))
