@@ -1,7 +1,10 @@
 from datetime import datetime
+from typing import Optional
 from uuid import UUID
 
 from pydantic import BaseModel, ConfigDict
+
+from app.schemas.person_attached_room import PersonAttachedRoomRead
 
 
 class UserProfileCreate(BaseModel):
@@ -27,9 +30,9 @@ class UserProfileUpdate(UserProfileCreate):
 class UserProfileRead(UserProfileCreate):
     id: int
     user_id: UUID
+    room_distribution: Optional[PersonAttachedRoomRead] = None
 
-    class Config:
-        model_config = ConfigDict(from_attributes=True)
+    model_config = ConfigDict(from_attributes=True)
 
 
 class UserUUID(BaseModel):

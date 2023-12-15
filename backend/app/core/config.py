@@ -21,7 +21,7 @@ class Settings(BaseSettings):
 
     ACCESS_TOKEN_EXPIRE_MINUTES: int = 30 * 24 * 60  # 30 days
 
-    BACKEND_CORS_ORIGINS: List[AnyHttpUrl] = []
+    BACKEND_CORS_ORIGINS: Optional[List[AnyHttpUrl]] = []
 
     # The following variables need to be defined in environment
 

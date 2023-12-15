@@ -1,8 +1,7 @@
 from uuid import UUID
 
-from fastapi_users_db_sqlalchemy import GUID
 from sqlalchemy import ForeignKey, Integer
-from sqlalchemy.orm import Mapped, mapped_column
+from sqlalchemy.orm import Mapped, mapped_column, relationship
 
 from app.db import Base
 from app.schemas.person_attached_room import PersonAttachedRoomRead
@@ -15,6 +14,7 @@ class PersonAttachedRoom(Base):
     room_id: Mapped[int] = mapped_column(
         Integer, ForeignKey("rooms.id", ondelete="CASCADE")
     )
+    room: Mapped["Room"] = relationship("Room", lazy="joined", foreign_keys=[room_id])
 
     def to_dto(self) -> PersonAttachedRoomRead:
         return PersonAttachedRoomRead.model_validate(self)

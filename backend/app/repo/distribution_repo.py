@@ -65,6 +65,8 @@ class DistributionRepo(SQLAlchemyRepo):
                         person_attached_rooms.append(person_attached_room)
                         break
             else:
-                raise Exception(f"No suitable room found for user {user.user_id}")
+                person_attached_rooms.append(
+                    PersonAttachedRoom(user_id=user.user_id, room_id=None)
+                )
 
         return person_attached_rooms
