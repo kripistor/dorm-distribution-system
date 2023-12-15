@@ -22,7 +22,7 @@ class DocumentRepo(SQLAlchemyRepo):
         center_alignment = Alignment(horizontal="center")
 
         for dormitory in dormitories:
-            dormitory_statistics = await dormitory_repo.get_dormitory_statistics(
+            dormitory_statistics = await dormitory_repo.get_dormitory_stats_by_id(
                 dormitory.id
             )
 
