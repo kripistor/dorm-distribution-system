@@ -20,10 +20,11 @@ function Sidebar({isOpen, toggleSidebar}) {
     }, [isOpen]);
     const items = [
         (props) => <Link to="/" onClick={toggleSidebar} {...props}>Главная</Link>,
-        (props) => <Link to="/dorms" onClick={toggleSidebar} {...props}>Общежития</Link>,
+        // (props) => <Link to="/dorms" onClick={toggleSidebar} {...props}>Общежития</Link>,
         (props) => <Link to="#" onClick={toggleSidebar} {...props}>Размер платы</Link>,
-        (props) => <Link to="#" onClick={toggleSidebar} {...props}>Статистика</Link>,
+        // (props) => <Link to="#" onClick={toggleSidebar} {...props}>Статистика</Link>,
         (props) => <Link to="#" onClick={toggleSidebar} {...props}>Отчётность</Link>,
+        (props) => <Link to="/docs" onClick={toggleSidebar} {...props}>Документы</Link>,
         (props) => <Link to="/users" onClick={toggleSidebar} {...props}>Студенты</Link>,
         (props) => <Link to="/login" onClick={toggleSidebar} {...props}>Авторизация</Link>,
         (props) => <Link to="/users" onClick={toggleSidebar} {...props}>Поиск</Link>,

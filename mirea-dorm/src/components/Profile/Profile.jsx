@@ -15,7 +15,7 @@ export default function Profile({profile}) {
                         </div>
                         <div className={styles.person_card_info}>
 
-                            <div>Номер карточки: <strong>{profile.card_number}</strong></div>
+                            <div>Номер студенческого: <strong>{profile.card_number}</strong></div>
                             <div>Email: <strong>{profile.login}</strong></div>
                             <div>Дата рождения: <strong>{profile.birthdate}</strong></div>
                             <div>Пол: <strong>{profile.sex}</strong></div>

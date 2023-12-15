@@ -9,7 +9,7 @@ export default function UsersPage({toggleSideBar, isSidebarOpen}) {
             <Header toggleSidebar={toggleSideBar}/>
             <section>
                 <div>
-                    <h1>Список студентов</h1>
+                    <h1 className="ms-3">Список студентов</h1>
                     <UsersTable/>
                 </div>
             </section>

@@ -10,7 +10,7 @@ const MainPage = ({toggleSideBar, isSidebarOpen}) => {
     return (
         <>
             <Sidebar isOpen={isSidebarOpen} toggleSidebar={toggleSideBar}/>
-            <section>
+            <section style={{marginBottom:"50px"}}>
                 <Header toggleSidebar={toggleSideBar}/>
                 <div className="container-fluid">
                     <h1 className={styles.main_header}>Главная</h1>
@@ -21,7 +21,7 @@ const MainPage = ({toggleSideBar, isSidebarOpen}) => {
                     <h3 className={styles.margin_top_36}>Статистика</h3>
 
                     <DormStats/>
-                    <h3 className={styles.margin_top_36}>Отчетность</h3>
+                    {/*<h3 className={styles.margin_top_36}>Отчетность</h3>*/}
                 </div>
             </section>
             <Footer/>

@@ -31,7 +31,7 @@ function App() {
                        element={<DormPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
                 <Route path="/users"
                        element={<UsersPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
-                <Route path="/documents"
+                <Route path="/docs"
                        element={<DocsPage toggleSideBar={toggleSidebar} isSidebarOpen={isSidebarOpen}/>}/>
             </Routes>
         </BrowserRouter>

@@ -2,7 +2,6 @@ import React, {useEffect, useState} from 'react';
 import {Button, Input, Table} from 'antd';
 import {useFetching} from "../../hooks/UseFetching";
 import UsersService from "../../api/UsersService";
-import {map} from "react-bootstrap/ElementChildren";
 
 export default function UsersTable() {
     const [selectedRowKeys, setSelectedRowKeys] = useState([]);
@@ -15,13 +14,15 @@ export default function UsersTable() {
         if (isUsersLoading) {
             setLoading(true)
         }
+        console.log(response)
         // add key to each user from user_id
         response = response.map((user) => {
             user.key = user.user_id;
+            user.isDistributed = user.room_distribution !== null ? "Да" : "Нет";
+            user.room_id = user.room_distribution !== null ? user.room_distribution.room_id : "Не заселен";
             return user
         });
 
-        console.log(response)
         setUsers(response)
         setDataSource(response)
         setLoading(false)
@@ -53,6 +54,8 @@ export default function UsersTable() {
     );
     const start = () => {
         setLoading(true);
+        // update users
+        fetchingUsers().catch(e => console.log(e))
         // ajax request after empty completing
         setTimeout(() => {
             setSelectedRowKeys([]);
@@ -69,8 +72,11 @@ export default function UsersTable() {
     };
     const hasSelected = selectedRowKeys.length > 0;
     const sendToServer = async () => {
-        // For test purposes, we're just logging the selected row keys
-        await UsersService.distribute_users({users_id: selectedRowKeys, dorm_id: 1})
+        let distibution = await UsersService.distribute_users({users_id: selectedRowKeys, dorm_id: 1})
+        alert("Студенты успешно зачислены")
+        setSelectedRowKeys([])
+        //     reload users
+        fetchingUsers().catch(e => console.log(e))
     };
     const columns = [
         {
@@ -85,22 +91,24 @@ export default function UsersTable() {
             filterSearch: true,
             filters: [
                 {
-                    text: '1',
-                    value: '1',
+                    text: 1,
+                    value: 1,
                 },
                 {
-                    text: '2',
-                    value: '2',
+                    text: 2,
+                    value: 2,
                 },
                 {
-                    text: '3',
-                    value: '3',
+                    text: 3,
+                    value: 3,
                 },
                 {
-                    text: '4',
-                    value: '4',
+                    text: 4,
+                    value: 4,
                 },
             ],
+            onFilter: (value, record) => record.course === value,
+            width: "5%"
         },
         {
             title: 'Пол',
@@ -118,10 +126,10 @@ export default function UsersTable() {
                 },
             ],
             onFilter: (value, record) => record.gender.includes(value),
-            width: '10%'
+            width: '5%'
         },
         {
-            title: 'Номер карточки',
+            title: 'Номер студенческого',
             dataIndex: 'card_number',
         },
         {
@@ -129,8 +137,27 @@ export default function UsersTable() {
             dataIndex: "phone"
         },
         {
-            title: "Инвалидность",
-            dataIndex: "concession"
+            title: "Заселен",
+            dataIndex: "isDistributed",
+            filtered: true,
+            filterSearch: true,
+            filters: [
+                {
+                    text: 'Да',
+                    value: 'Да',
+                },
+                {
+                    text: 'Нет',
+                    value: 'Нет',
+                },
+            ],
+            onFilter: (value, record) => record.isDistributed.includes(value),
+        },
+        {
+            title: "Комната",
+            dataIndex: "room_id",
+            filtered: true,
+            filterSearch: true,
         }
     ];
 
@@ -143,11 +170,14 @@ export default function UsersTable() {
                     }}
                 >
                     <p>Всего студентов: {usersCount}</p>
-                    <Button type="primary" onClick={start} disabled={!hasSelected} loading={loading}>
+                    <Button type="primary" onClick={start} loading={loading} style={{marginRight: "10px"}}>
                         Обновить
                     </Button>
-                    <Button type="primary" onClick={sendToServer} disabled={!hasSelected}>
+                    <Button type="primary" onClick={sendToServer} disabled={!hasSelected} style={{marginRight: "10px"}}>
                         Зачислить
+                    </Button>
+                    <Button type="primary" >
+                        Скачать отчет
                     </Button>
                     <span
                         style={{

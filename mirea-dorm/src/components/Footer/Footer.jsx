@@ -7,9 +7,9 @@ export default function Footer() {
         <footer className={styles.footer}>
             <img src={mireaLogo} alt="" className={styles.mirea_logo}/>
             <div className={styles.contactInfo}>
-                <p>Tel: +1 234 567 890</p>
-                <p>Email: info@example.com</p>
-                <p>Address: 1234 Street, City, Country</p>
+                <p>Тел: +7 (499) 215-65-65</p>
+                <p>Email: info@mirea.ru</p>
+                <p>Адрес: пр. Вернадского, 78</p>
             </div>
         </footer>
     )

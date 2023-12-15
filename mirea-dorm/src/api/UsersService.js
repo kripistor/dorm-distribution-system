@@ -19,8 +19,20 @@ export default class UsersService {
         })
     }
     static async distribute_users({users_id, dorm_id}) {
+        let data = JSON.stringify({
+            "user_ids": users_id
+        })
+        let config= {
+            method: 'post',
+                maxBodyLength: Infinity,
+                url: 'https://api.mirea.hm4nx.ru/api/v1/distributions/1',
+                headers: {
+                'Content-Type': 'application/json'
+            },
+            data : data
+        }
         return new Promise((resolve, reject) => {
-            axios.post(`${serverPath}/user_profiles/distribute/${dorm_id}`, {user_ids: users_id}).then((res) => {
+            axios.request(config).then((res) => {
                     resolve(res.data)
                 }
             ).catch((err) => {
