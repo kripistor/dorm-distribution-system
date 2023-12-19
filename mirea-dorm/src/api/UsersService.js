@@ -37,7 +37,6 @@ export default class UsersService {
                 }
             ).catch((err) => {
                     console.error(err)
-                    reject(err)
                 }
             )
         })

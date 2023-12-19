@@ -8,7 +8,7 @@ export default function Profile({profile}) {
                 <div className={styles.person_card}>
                     {/*    set profile image from data, if no image - placeholder*/}
                     <img className={styles.person_card_img}
-                         src={profile.img ? profile.img : "https://via.placeholder.com/300"}/>
+                         src={profile.img ? profile.img : "https://cdn4.vectorstock.com/i/1000x1000/46/73/person-gray-photo-placeholder-man-material-design-vector-23804673.jpg"} alt="person_photo"/>
                     <div>
                         <div>
                             <strong>{profile.name}</strong>

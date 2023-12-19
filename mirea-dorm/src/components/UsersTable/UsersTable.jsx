@@ -176,7 +176,7 @@ export default function UsersTable() {
                     <Button type="primary" onClick={sendToServer} disabled={!hasSelected} style={{marginRight: "10px"}}>
                         Зачислить
                     </Button>
-                    <Button type="primary" >
+                    <Button type="primary" variant="link" href="https://api.mirea.hm4nx.ru/api/v1/documents/generate_report">
                         Скачать отчет
                     </Button>
                     <span

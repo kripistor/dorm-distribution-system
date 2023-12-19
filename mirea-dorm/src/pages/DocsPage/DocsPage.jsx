@@ -18,12 +18,12 @@ export default function DocsPage({toggleSideBar, isSidebarOpen}) {
                         <h3>Документы и приказы</h3>
                         <ul>
                             <li>
-                                <Button variant="link" href="https://www.mirea.ru/docs/264916/" download >
+                                <Button variant="link" href="https://www.mirea.ru/upload/iblock/932/kp9hy1nav22fhv1crmnlesajc0ii95dq/Prikaz-1310_Stoimost-Ob-ustanovlenii-razmera-platy.pdf" download >
                                     <span className={styles.download_text}>Приказ "Об установлении размера платы за проживание в общежитиях РТУ МИРЭА"</span>
                                 </Button>
                             </li>
                             <li>
-                                <Button variant="link" href="https://www.mirea.ru/docs/178180/" download>
+                                <Button variant="link" href="https://www.mirea.ru/upload/iblock/c36/eiegvnzwugr7zytbsw3c4d2copknucwd/Poryadok-predostavleniya-mest-v-studencheskikh-obshchezhitiyakh_prover_2023.pdf" download>
                                     <span className={styles.download_text}>Приказ о введении в действие Порядка предоставления мест в студенческих общежитиях...</span>
                                 </Button>
                             </li>
