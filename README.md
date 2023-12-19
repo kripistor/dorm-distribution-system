@@ -25,4 +25,4 @@ npm start
 
 ## Прототип
 
-https://dorm.mirea.hm4nx.ru
+https://api.mirea.hm4nx.ru

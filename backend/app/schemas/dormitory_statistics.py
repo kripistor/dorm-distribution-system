@@ -2,11 +2,6 @@ from typing import Optional, List
 
 from pydantic import BaseModel, ConfigDict
 
-from app.schemas.dormitory import DormitoryRead
-from app.schemas.floor import FloorRead
-from app.schemas.person_attached_room import PersonAttachedRoomRead
-from app.schemas.room import RoomRead
-
 
 class FloorStatistics(BaseModel):
     floor_id: int

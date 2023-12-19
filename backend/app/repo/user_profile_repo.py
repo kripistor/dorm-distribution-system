@@ -2,17 +2,21 @@ import logging
 from typing import List
 from uuid import UUID
 
-from sqlalchemy import select, delete, func
+from sqlalchemy import select, delete
 
+from app.models.person_attached_room import PersonAttachedRoom
 from app.models.user_profile import UserProfile
-
 from app.repo.repo import SQLAlchemyRepo
 from app.schemas.user_profile import UserProfileUpdate
 
 
 class UserProfileRepo(SQLAlchemyRepo):
     async def get_all(self) -> List[UserProfile]:
-        return (await self.session.execute(select(UserProfile))).scalars().all()
+        # get all students, include info about their rooms
+        stmt = await self.session.execute(
+            select(UserProfile).order_by(UserProfile.name)
+        )
+        return stmt.scalars().all()
 
     async def get_by_id(self, user_id: UUID) -> UserProfile:
         return (
