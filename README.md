@@ -21,8 +21,3 @@ docker compose up -d --build
 ```bash
 npm start
 ```
-
-
-## Прототип
-
-https://api.mirea.hm4nx.ru
